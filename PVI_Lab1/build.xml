@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="PVI_Lab1" default="build" basedir=".">
+    
+    <!-- Определение свойств -->
+    <property name="src.dir" value="src" />
+    <property name="web.dir" value="src/main/webapp" />
+    <property name="build.dir" value="build" />
+    <property name="classes.dir" value="${build.dir}/WEB-INF/classes" />
+    <property name="war.file" value="PVI_Lab1.war" />
+    
+    <!-- Настройка плагина для компиляции Java кода -->
+    <taskdef name="javac" classname="org.apache.tools.ant.taskdefs.Javac">
+        <classpath>
+            <fileset dir="lib">
+                <include name="**/*.jar" />
+            </fileset>
+        </classpath>
+    </taskdef>
+    
+    <!-- Определение цели для компиляции Java кода -->
+    <target name="compile">
+        <mkdir dir="${classes.dir}" />
+        <javac srcdir="${src.dir}" destdir="${classes.dir}">
+            <classpath>
+                <fileset dir="lib">
+                    <include name="**/*.jar" />
+                </fileset>
+            </classpath>
+        </javac>
+    </target>
+    
+    <!-- Определение цели для копирования ресурсов -->
+    <target name="copy-resources">
+        <copy todir="${classes.dir}">
+            <fileset dir="${src.dir}">
+                <exclude name="**/*.java" />
+            </fileset>
+        </copy>
+        <copy todir="${web.dir}">
+            <fileset dir="resources" />
+        </copy>
+    </target>
+    
+    <!-- Определение цели для создания WAR-архива -->
+    <target name="war">
+        <war destfile="${war.file}" webxml="${web.dir}/WEB-INF/web.xml">
+            <fileset dir="${web.dir}" />
+            <classes dir="${classes.dir}" />
+        </war>
+    </target>
+    
+    <!-- Определение цели по умолчанию -->
+    <target name="build" depends="compile, copy-resources, war">
+        <echo message="WAR-архив создан: ${war.file}" />
+    </target>
+    
+</project>

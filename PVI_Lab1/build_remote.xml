@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="PVI_Lab1" default="deploy" basedir=".">
+    
+    <!-- Определение свойств -->
+    <property name="src.dir" value="src" />
+    <property name="web.dir" value="src/main/webapp" />
+    <property name="build.dir" value="build" />
+    <property name="classes.dir" value="${build.dir}/WEB-INF/classes" />
+    <property name="war.file" value="PVI_Lab1.war" />
+    
+    <!-- Определение свойств для удаленного сервера -->
+    <property name="remote.server.host" value="192.168.182.128" />
+    <property name="remote.server.port" value="8080" />
+    
+	<!-- Определение цели для компиляции Java кода -->
+	<target name="compile">
+        <mkdir dir="${classes.dir}" />
+        <javac srcdir="${src.dir}" destdir="${classes.dir}">
+            <classpath>
+                <fileset dir="lib">
+                    <include name="**/*.jar" />
+                </fileset>
+            </classpath>
+        </javac>
+    </target>
+    
+    <!-- Определение цели для копирования ресурсов -->
+    <target name="copy-resources">
+        <copy todir="${classes.dir}">
+            <fileset dir="${src.dir}">
+                <exclude name="**/*.java" />
+            </fileset>
+        </copy>
+        <copy todir="${web.dir}">
+            <fileset dir="resources" />
+        </copy>
+    </target>
+    
+    <!-- Определение цели для создания WAR-архива -->
+    <target name="war">
+        <war destfile="${war.file}" webxml="${web.dir}/WEB-INF/web.xml">
+            <fileset dir="${web.dir}" />
+            <classes dir="${classes.dir}" />
+        </war>
+    </target>
+	
+    <!-- Задача для компиляции и создания WAR-архива -->
+    <target name="build" depends="compile, copy-resources, war">
+        <echo message="WAR-архив создан: ${war.file}" />
+    </target>
+    
+    <!-- Задача для копирования на удаленный сервер -->
+    <target name="deploy" depends="build">
+        <!-- Копирование WAR-архива на удаленный сервер -->
+        <echo message="Копирование ${war.file} на удаленный сервер..." />
+        <get src="${war.file}" dest="http://${remote.server.host}:${remote.server.port}/manager/text/deploy?path=/${war.file}&amp;update=true" username="tomcat" password="tomcat" />
+    </target>
+    
+</project>
