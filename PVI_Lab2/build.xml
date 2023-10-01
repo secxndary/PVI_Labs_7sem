@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="PVI_Lab1" default="build" basedir=".">
+<project name="PVI_Lab2" default="build" basedir=".">
     
     <!-- Определение свойств -->
     <property name="src.dir" value="src" />
     <property name="web.dir" value="src/main/webapp" />
     <property name="build.dir" value="build" />
     <property name="classes.dir" value="${build.dir}/WEB-INF/classes" />
-    <property name="war.file" value="PVI_Lab1.war" />
+    <property name="war.file" value="PVI_Lab2.war" />
     
     <!-- Настройка плагина для компиляции Java кода -->
     <taskdef name="javac" classname="org.apache.tools.ant.taskdefs.Javac">
