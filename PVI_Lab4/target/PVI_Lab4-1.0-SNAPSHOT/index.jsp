@@ -1,5 +1,7 @@
 <%@ page import="java.util.Calendar" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.io.FileWriter" %>
+<%@ page import="java.io.PrintWriter" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -15,19 +17,19 @@
     String greeting;
 
 
-    // Greeting
+    // ====================================  Приветствие  =====================================
     if (hourOfDay >= 0 && hourOfDay < 12)
-        greeting = "Good morning!";
+        greeting = "Good morning";
     else if (hourOfDay >= 12 && hourOfDay < 17)
-        greeting = "Good afternoon!";
+        greeting = "Good afternoon";
     else if (hourOfDay >= 17 && hourOfDay < 20)
-        greeting = "Good evening!";
+        greeting = "Good evening";
     else
-        greeting = "Good night!";
+        greeting = "Good night";
     out.println("<h2>"  + greeting + "</h2>");
 
 
-    // Table
+    // ===============================  Таблица с днями недели  ===============================
     out.println("<table border='1' style=\"border-collapse: collapse\">");
     out.println("<tr><th>Date</th><th>Day of Week</th></tr>");
 
@@ -47,6 +49,15 @@
     }
     out.println("</table>");
     out.println("<br/>");
+
+
+    // ==================================  Кнопка Press  ==================================
+    String[] words = greeting.split(" ");
+    String jspName = words[words.length - 1];
+
+    out.println("<form action=\"" + jspName + ".jsp\">" +
+            "<input type=\"submit\" value=\"Press\">" +
+            "</form>");
 %>
 </body>
 </html>
