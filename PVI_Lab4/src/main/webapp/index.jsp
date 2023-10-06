@@ -2,7 +2,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.io.FileWriter" %>
 <%@ page import="java.io.PrintWriter" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,8 +56,13 @@
     String jspName = words[words.length - 1];
 
     out.println("<form action=\"" + jspName + ".jsp\">" +
-            "<input type=\"submit\" value=\"Press\">" +
-            "</form>");
+                "<input type=\"submit\" value=\"Press\">" +
+                "</form>");
+
 %>
+
+<%@ include file="night.jsp" %>
+<%--<jsp:include page="night.jsp" />--%>
+
 </body>
 </html>
