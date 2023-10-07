@@ -6,7 +6,6 @@
 </head>
 <body>
     <h1>PVI-5</h1>
-    <br/>
-    <a href="ttt.jsp">Ttt</a>
+    <p><a href="ttt.jsp">Ttt.jsp</a></p>
 </body>
 </html>

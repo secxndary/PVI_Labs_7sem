@@ -10,7 +10,7 @@ public class SubmitTag extends TagSupport {
         JspWriter out = pageContext.getOut();
         try {
             out.println("<input type=\"submit\" name=\"ok\" value=\"OK\">");
-            out.println("<input type=\"submit\" name=\"cancel\" value=\"Cancel\">");
+            out.println("<input type=\"button\" name=\"cancel\" value=\"Cancel\">");
         }
         catch (IOException e) {
             throw new JspException(e.getMessage());

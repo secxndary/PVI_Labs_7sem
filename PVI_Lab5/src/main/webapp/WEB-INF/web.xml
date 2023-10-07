@@ -4,14 +4,14 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <servlet>
-        <servlet-name>Ttt</servlet-name>
-        <servlet-class>com.example.pvi_lab5.TttServlet</servlet-class>
-    </servlet>
+<!--    <servlet>-->
+<!--        <servlet-name>Ttt</servlet-name>-->
+<!--        <servlet-class>com.example.pvi_lab5.TttServlet</servlet-class>-->
+<!--    </servlet>-->
 
-    <servlet-mapping>
-        <servlet-name>Ttt</servlet-name>
-        <url-pattern>/ttt-servlet</url-pattern>
-    </servlet-mapping>
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>Ttt</servlet-name>-->
+<!--        <url-pattern>/ttt-servlet</url-pattern>-->
+<!--    </servlet-mapping>-->
 
 </web-app>

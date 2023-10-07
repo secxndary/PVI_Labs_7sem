@@ -6,7 +6,7 @@
 </head>
 <body>
 
-    <smw:dossier action="/ttt-servlet">
+    <smw:dossier action="ttt-servlet">
         <label>Surname</label> <br />
         <smw:surname /> <br />
         <label>Lastname</label> <br />

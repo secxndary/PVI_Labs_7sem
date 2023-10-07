@@ -2,10 +2,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PVI-5</title>
+    <title>JSP - Hello World</title>
 </head>
 <body>
-    <h1>PVI-5</h1>
-    <p><a href="ttt.jsp">Ttt.jsp</a></p>
+<h1><%= "Hello World!" %>
+</h1>
+<br/>
+<a href="hello-servlet">Hello Servlet</a>
 </body>
 </html>
