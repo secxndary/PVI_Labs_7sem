@@ -4,9 +4,8 @@
 <taglib xmlns="http://java.sun.com/JSP/TagLibraryDescriptor">
     <tlib-version>1.0</tlib-version>
     <jsp-version>2.0</jsp-version>
-    <short-name>customtags</short-name>
-    <uri>http://example.com/customtags</uri>
-    <info>Custom Tags Library</info>
+    <short-name>custom-tags</short-name>
+    <uri>custom-taglib</uri>
 
     <!-- Описание тега dossier -->
     <tag>
