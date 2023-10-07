@@ -4,17 +4,17 @@
 <%@ page import="java.io.FileWriter" %>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <html>
-<%String greeting = "Evening";%>
+<%String greetingEvening = "Evening";%>
 <head>
-    <title><%=greeting%></title>
+    <title><%=greetingEvening%></title>
 </head>
 <body>
-<h1><%=greeting%> Page</h1>
+<h1><%=greetingEvening%> Page</h1>
 <%
     try {
         String logFile = "C:\\Users\\valda\\source\\repos\\semester#7\\ПвI\\PVI_Lab4\\logs\\stdout.txt";
         SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
-        String logMessage = "[INFO] " + dateTimeFormat.format(Calendar.getInstance().getTime()) + " – " + greeting;
+        String logMessage = "[INFO] " + dateTimeFormat.format(Calendar.getInstance().getTime()) + " – " + greetingEvening;
         PrintWriter writer = new PrintWriter(new FileWriter(logFile, true));
         writer.println(logMessage);
         writer.close();

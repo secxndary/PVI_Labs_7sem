@@ -53,16 +53,27 @@
 
     // ==================================  Кнопка Press  ==================================
     String[] words = greeting.split(" ");
-    String jspName = words[words.length - 1];
+    String greetingName = words[words.length - 1];
+    String jspName = greetingName + ".jsp";
 
-    out.println("<form action=\"" + jspName + ".jsp\">" +
+    out.println("<form action=\"" + jspName + "\">" +
                 "<input type=\"submit\" value=\"Press\">" +
                 "</form>");
-
 %>
 
-<%@ include file="night.jsp" %>
-<%--<jsp:include page="night.jsp" />--%>
 
+<%--<%@ include file="afternoon.jsp" %>--%>
+<jsp:include page="afternoon.jsp" />
+
+
+<p><a href="afternoon-servlet">Afternoon Servlet</a></p>
+
+
+<%--<jsp:forward page="afternoon.jsp"></jsp:forward>--%>
+
+
+<p><a href="jjj-servlet?jspName=<%=jspName%>&redirectType=forward">Jjj Servlet (forward)</a></p>
+<p><a href="jjj-servlet?jspName=<%=jspName%>&redirectType=redirect">Jjj Servlet (redirect)</a></p>
+<p><a href="jjj-servlet?jspName=<%=jspName%>&redirectType=httpClient">Jjj Servlet (httpClient)</a></p>
 </body>
 </html>
