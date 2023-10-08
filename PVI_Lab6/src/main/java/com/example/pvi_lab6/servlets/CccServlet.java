@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -23,7 +24,7 @@ public class CccServlet extends HttpServlet {
         System.out.println(ConsoleColors.GREEN + "\n[CCC] init: atrCBean = " + servletContext.getAttribute("atrCBean"));
     }
 
-    public void service(ServletRequest req, ServletResponse res) throws IOException {
+    public void service(ServletRequest req, ServletResponse res) throws IOException, ServletException {
 
         HttpServletRequest httpServletRequest = (HttpServletRequest)req;
         res.setContentType("text/html");
@@ -68,39 +69,14 @@ public class CccServlet extends HttpServlet {
                     servletContext.getAttribute("atrCBean") + ConsoleColors.YELLOW + " (old)\n");
         }
 
-        Object atrCBean = servletContext.getAttribute("atrCBean");
-        out.println("<h1>CBean: " + cBeanParameter + "</h1>");
-        out.println("<h2>AtrCBean: " + atrCBean + "</h2>");
 
-        out.println("<h3>Value1 = " + cBean.getValue1() + "</h3>");
-        out.println("<h3>Value2 = " + cBean.getValue2() + "</h3>");
-        out.println("<h3>Value3 = " + cBean.getValue3() + "</h3>");
-
-//            String param1 = req.getParameter("value1"),
-//                    param2 = req.getParameter("value2"),
-//                    param3 = req.getParameter("value3");
-//
-//
-//            if (param1 != null && param2 != null && param3 != null) {
-//                cBean.setValue1(param1);
-//                cBean.setValue2(param2);
-//                cBean.setValue3(param3);
-//
-//                req.getRequestDispatcher("/Ccc.jsp").forward(req, res);
-//            }
-//        } else if (req.getParameter("CBean").equals("old")){ //if "old"
-//            ServletContext servletContext = getServletContext();
-//            System.out.println("old: " + servletContext.getAttribute("atrCBean"));
-//            req.getRequestDispatcher("/Ccc.jsp").forward(req, res);
-//
-//        }
+        setSessionAttributes(httpServletRequest, cBeanParameter);
+        req.getRequestDispatcher("ccc.jsp").forward(req, res);
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println(ConsoleColors.PURPLE + "[CCC] doGet");
-    }
-
-    public void doPost(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println(ConsoleColors.PURPLE + "[CCC] doPost");
+    private void setSessionAttributes(HttpServletRequest httpServletRequest, String cBeanParameter) {
+        HttpSession session = httpServletRequest.getSession();
+        session.setAttribute("cBeanParameter", cBeanParameter);
+        session.setAttribute("cBean", cBean);
     }
 }
