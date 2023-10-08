@@ -1,4 +1,4 @@
-package com.example.pvi_lab6;
+package com.example.pvi_lab6.utils;
 
 public class CBean {
 

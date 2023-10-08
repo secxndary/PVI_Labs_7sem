@@ -1,4 +1,5 @@
-package com.example.pvi_lab6;
+package com.example.pvi_lab6.servlets;
+import com.example.pvi_lab6.utils.ConsoleColors;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import javax.servlet.ServletContext;

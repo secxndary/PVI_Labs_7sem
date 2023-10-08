@@ -1,4 +1,4 @@
-package com.example.pvi_lab6;
+package com.example.pvi_lab6.servlets;
 import java.io.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
