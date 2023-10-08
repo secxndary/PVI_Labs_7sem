@@ -11,12 +11,12 @@
     CBean cBean = (CBean) session.getAttribute("cBean");
 %>
 
-<h1>CBean: <%=cBeanParameter%></h1>
-<h2>AtrCBean: <%=atrCBean%> </h2>
+    <h1>CBean: <%=cBeanParameter%></h1>
+    <h2>AtrCBean: <%=atrCBean%> </h2>
 
-<h3>Value1 = <%=cBean.getValue1()%> </h3>
-<h3>Value2 = <%=cBean.getValue2()%> </h3>
-<h3>Value3 = <%=cBean.getValue3()%> </h3>
+    <h3>Value1 = <%=cBean.getValue1()%> </h3>
+    <h3>Value2 = <%=cBean.getValue2()%> </h3>
+    <h3>Value3 = <%=cBean.getValue3()%> </h3>
 
 </body>
 </html>
