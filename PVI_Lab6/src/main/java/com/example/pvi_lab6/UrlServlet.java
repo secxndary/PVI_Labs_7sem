@@ -18,22 +18,20 @@ public class UrlServlet extends HttpServlet {
 
         // Query-параметр urln (должен быть равен 1 или 2)
         String urlnParameter = request.getParameter("urln");
-        System.out.println("\nUrln parameter:\t\t" + urlnParameter);
+        System.out.println(ConsoleColors.PURPLE + "\nUrln parameter:\t\t" + ConsoleColors.YELLOW + urlnParameter);
 
         // Значение параметра инициализации сервлета (в web.xml) с param-name URL1 либо URL2
         String servletContextParameter = servletContext.getInitParameter("URL" + urlnParameter);
-        System.out.println("Context parameter:\t" + servletContextParameter);
+        System.out.println(ConsoleColors.PURPLE + "Context parameter:\t" + ConsoleColors.YELLOW + servletContextParameter);
 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        if (servletContextParameter != null) {
-            HttpClient client = new HttpClient();
-            GetMethod method = new GetMethod(servletContextParameter);
-            client.executeMethod(method);
-            out.println(method.getResponseBodyAsString());
-        } else {
+        if (servletContextParameter == null)
             out.println("Parameter URLn not found.");
-        }
+        HttpClient client = new HttpClient();
+        GetMethod method = new GetMethod(servletContextParameter);
+        client.executeMethod(method);
+        out.println(method.getResponseBodyAsString());
     }
 }
