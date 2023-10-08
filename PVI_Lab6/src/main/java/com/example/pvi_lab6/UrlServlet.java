@@ -13,16 +13,23 @@ import java.io.PrintWriter;
 public class UrlServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String urlnParameter = request.getParameter("urln");
+
         ServletContext servletContext = getServletContext();
-        String uri = servletContext.getInitParameter("URL" + urlnParameter);
+
+        // Query-параметр urln (должен быть равен 1 или 2)
+        String urlnParameter = request.getParameter("urln");
+        System.out.println("\nUrln parameter:\t\t" + urlnParameter);
+
+        // Значение параметра инициализации сервлета (в web.xml) с param-name URL1 либо URL2
+        String servletContextParameter = servletContext.getInitParameter("URL" + urlnParameter);
+        System.out.println("Context parameter:\t" + servletContextParameter);
 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        if (uri != null) {
+        if (servletContextParameter != null) {
             HttpClient client = new HttpClient();
-            GetMethod method = new GetMethod(uri);
+            GetMethod method = new GetMethod(servletContextParameter);
             client.executeMethod(method);
             out.println(method.getResponseBodyAsString());
         } else {
