@@ -1,25 +1,92 @@
 package com.example.pvi_lab6;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
+import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(name = "cccServlet", value = "/ccc-servlet")
 public class CccServlet extends HttpServlet {
 
-    @Override
-    public void init() {
+    public CBean cBean = null;
+    private ServletContext servletContext;
 
+    public void init() {
+        cBean = new CBean();
+        servletContext = getServletContext();
+        servletContext.setAttribute("atrCBean", cBean);
+        System.out.println(ConsoleColors.GREEN + "\n[CCC] init: atrCBean = " + servletContext.getAttribute("atrCBean"));
+    }
+
+    public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+
+        String cBeanParameter = req.getParameter("CBean");  // Query-параметр CBean. Равен либо new, либо old
+        System.out.println(ConsoleColors.CYAN + "[CCC] service: CBean = " + cBeanParameter);
+
+        res.setContentType("text/html");
+        PrintWriter out = res.getWriter();
+
+        if (cBeanParameter == null) {
+            out.println("<h2>CBean parameter is null.</h2>");
+            System.out.println(ConsoleColors.RED + "[CCC] service: CBean parameter is null");
+            return;
+        }
+        if (!cBeanParameter.equalsIgnoreCase("new") && !cBeanParameter.equalsIgnoreCase("old")){
+            out.println("<h2>CBean parameter should be equal to \"old\" or \"new\".</h2>");
+            System.out.println(ConsoleColors.RED + "[CCC] service: CBean parameter should be equal to \"old\" or \"new\"");
+            return;
+        }
+
+
+        if (cBeanParameter.equalsIgnoreCase("new")) {
+            cBean = new CBean();
+            servletContext.setAttribute("atrCBean", cBean);
+            Object atrCBeanNew = servletContext.getAttribute("atrCBean");
+
+            out.println("<h1>CBean: " + cBeanParameter + "</h1>");
+            out.println("<h2>AtrCBean: " + atrCBeanNew + "</h2>");
+
+            System.out.println(ConsoleColors.BLUE + "[CCC] service: atrCBean = " +
+                    servletContext.getAttribute("atrCBean") + ConsoleColors.YELLOW + " (new)");
+        }
+
+        else if (cBeanParameter.equalsIgnoreCase("old")) {
+            Object atrCBeanOld = servletContext.getAttribute("atrCBean");
+
+            out.println("<h1>CBean: " + cBeanParameter + "</h1>");
+            out.println("<h2>AtrCBean: " + atrCBeanOld + "</h2>");
+
+            System.out.println(ConsoleColors.BLUE + "[CCC] service: atrCBean = " +
+                    servletContext.getAttribute("atrCBean") + ConsoleColors.YELLOW + " (old)");
+        }
+
+//            String param1 = req.getParameter("value1"),
+//                    param2 = req.getParameter("value2"),
+//                    param3 = req.getParameter("value3");
+//
+//
+//            if (param1 != null && param2 != null && param3 != null) {
+//                cBean.setValue1(param1);
+//                cBean.setValue2(param2);
+//                cBean.setValue3(param3);
+//
+//                req.getRequestDispatcher("/Ccc.jsp").forward(req, res);
+//            }
+//        } else if (req.getParameter("CBean").equals("old")){ //if "old"
+//            ServletContext servletContext = getServletContext();
+//            System.out.println("old: " + servletContext.getAttribute("atrCBean"));
+//            req.getRequestDispatcher("/Ccc.jsp").forward(req, res);
+//
+//        }
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println(ConsoleColors.BLUE + "[CCC] doGet");
+        System.out.println(ConsoleColors.PURPLE + "[CCC] doGet");
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println(ConsoleColors.CYAN + "[CCC] doPost");
+        System.out.println(ConsoleColors.PURPLE + "[CCC] doPost");
     }
 }
