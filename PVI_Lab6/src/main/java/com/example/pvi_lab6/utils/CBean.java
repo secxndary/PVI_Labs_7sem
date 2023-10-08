@@ -6,6 +6,14 @@ public class CBean {
     private String Value2 = null;
     private String Value3 = null;
 
+    public CBean() { }
+
+    public CBean(String value1, String value2, String value3) {
+        Value1 = value1;
+        Value2 = value2;
+        Value3 = value3;
+    }
+
     public String getValue1() {
         return Value1;
     }

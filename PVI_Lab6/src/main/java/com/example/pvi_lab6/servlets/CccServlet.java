@@ -25,13 +25,24 @@ public class CccServlet extends HttpServlet {
 
     public void service(ServletRequest req, ServletResponse res) throws IOException {
 
-        // Query-параметр CBean. Равен либо new, либо old. В противном случае – ошибка
-        String cBeanParameter = req.getParameter("CBean");
-        System.out.println(ConsoleColors.CYAN + "[CCC] service: CBean = " + cBeanParameter);
-
+        HttpServletRequest httpServletRequest = (HttpServletRequest)req;
         res.setContentType("text/html");
         PrintWriter out = res.getWriter();
 
+        // Query-параметр CBean. Равен либо new, либо old. В противном случае – ошибка
+        String cBeanParameter = req.getParameter("CBean");
+        // Параметры value1, value2 и value3, передаваемые в POST-запросе (для установки в поля класса CBean)
+        String value1 = req.getParameter("value1");
+        String value2 = req.getParameter("value2");
+        String value3 = req.getParameter("value3");
+        System.out.println(ConsoleColors.CYAN + "[CCC] service: CBean = " + cBeanParameter);
+
+
+        if (!httpServletRequest.getMethod().equalsIgnoreCase("GET") && !httpServletRequest.getMethod().equalsIgnoreCase("POST")) {
+            out.println("<h2>Use GET or POST method.</h2>");
+            System.out.println(ConsoleColors.RED + "[CCC] service: Method should be GET or POST\n");
+            return;
+        }
         if (cBeanParameter == null) {
             out.println("<h2>CBean parameter is null.</h2>");
             System.out.println(ConsoleColors.RED + "[CCC] service: CBean parameter is null\n");
@@ -45,26 +56,25 @@ public class CccServlet extends HttpServlet {
 
 
         if (cBeanParameter.equalsIgnoreCase("new")) {
-            cBean = new CBean();
+            // Создать новый объект cBean с новыми значениями value1, value2, value3
+            // и установить новый атрибут контекста сервлета atrCBean
+            cBean = new CBean(value1, value2, value3);
             servletContext.setAttribute("atrCBean", cBean);
-            Object atrCBeanNew = servletContext.getAttribute("atrCBean");
-
-            out.println("<h1>CBean: " + cBeanParameter + "</h1>");
-            out.println("<h2>AtrCBean: " + atrCBeanNew + "</h2>");
-
             System.out.println(ConsoleColors.BLUE + "[CCC] service: atrCBean = " +
                     servletContext.getAttribute("atrCBean") + ConsoleColors.YELLOW + " (new)\n");
         }
-
         else if (cBeanParameter.equalsIgnoreCase("old")) {
-            Object atrCBeanOld = servletContext.getAttribute("atrCBean");
-
-            out.println("<h1>CBean: " + cBeanParameter + "</h1>");
-            out.println("<h2>AtrCBean: " + atrCBeanOld + "</h2>");
-
             System.out.println(ConsoleColors.BLUE + "[CCC] service: atrCBean = " +
                     servletContext.getAttribute("atrCBean") + ConsoleColors.YELLOW + " (old)\n");
         }
+
+        Object atrCBean = servletContext.getAttribute("atrCBean");
+        out.println("<h1>CBean: " + cBeanParameter + "</h1>");
+        out.println("<h2>AtrCBean: " + atrCBean + "</h2>");
+
+        out.println("<h3>Value1 = " + cBean.getValue1() + "</h3>");
+        out.println("<h3>Value2 = " + cBean.getValue2() + "</h3>");
+        out.println("<h3>Value3 = " + cBean.getValue3() + "</h3>");
 
 //            String param1 = req.getParameter("value1"),
 //                    param2 = req.getParameter("value2"),
