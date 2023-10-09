@@ -1,7 +1,5 @@
 <%@ page import="java.util.Calendar" %>
 <%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.io.FileWriter" %>
-<%@ page import="java.io.PrintWriter" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -18,11 +16,11 @@
 
 
     // ====================================  Приветствие  =====================================
-    if (hourOfDay >= 0 && hourOfDay < 12)
+    if (hourOfDay >= 6 && hourOfDay < 12)
         greeting = "Good morning";
-    else if (hourOfDay >= 12 && hourOfDay < 17)
+    else if (hourOfDay >= 12 && hourOfDay < 18)
         greeting = "Good afternoon";
-    else if (hourOfDay >= 17 && hourOfDay < 20)
+    else if (hourOfDay >= 18 && hourOfDay < 22)
         greeting = "Good evening";
     else
         greeting = "Good night";
