@@ -60,8 +60,8 @@
 %>
 
 
-<%--<%@ include file="afternoon.jsp" %>--%>
-<jsp:include page="afternoon.jsp" />
+<%@ include file="afternoon.jsp" %>
+<%--<jsp:include page="afternoon.jsp" />--%>
 
 
 <p><a href="afternoon-servlet">Afternoon Servlet</a></p>

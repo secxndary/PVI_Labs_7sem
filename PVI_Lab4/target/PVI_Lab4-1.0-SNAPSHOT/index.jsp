@@ -1,7 +1,5 @@
 <%@ page import="java.util.Calendar" %>
 <%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.io.FileWriter" %>
-<%@ page import="java.io.PrintWriter" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -62,8 +60,8 @@
 %>
 
 
-<%--<%@ include file="afternoon.jsp" %>--%>
-<jsp:include page="afternoon.jsp" />
+<%@ include file="afternoon.jsp" %>
+<%--<jsp:include page="afternoon.jsp" />--%>
 
 
 <p><a href="afternoon-servlet">Afternoon Servlet</a></p>

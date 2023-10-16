@@ -8,14 +8,14 @@
         <description>url1</description>
         <param-name>URL1</param-name>
         <!---<param-value>http://localhost:8081/PVI_Lab6_war_exploded/remote-servlet</param-value>-->
-        <param-value>http://remote-server-7:8080/PVI_Lab6_war_exploded/remote.html</param-value>
+        <param-value>http://remote-server-7:8080/PVI_Lab6-1.0-SNAPSHOT/remote.html</param-value>
     </context-param>
 
     <context-param>
         <description>url2</description>
         <param-name>URL2</param-name>
         <!---<param-value>http://localhost:8081/PVI_Lab6_war_exploded/remote-servlet</param-value>-->
-        <param-value>http://remote-server-7:8080/PVI_Lab6_war_exploded/remote-servlet</param-value>
+        <param-value>http://remote-server-7:8080/PVI_Lab6-1.0-SNAPSHOT/remote-servlet</param-value>
     </context-param>
 
 </web-app>
