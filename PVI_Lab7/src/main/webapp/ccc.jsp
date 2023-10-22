@@ -1,17 +1,13 @@
-<%@ page import="com.example.pvi_lab6.utils.CBean" %>
+<%@ page import="com.example.pvi_lab7.utils.CBean" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-    response.setHeader("Cache-Control","no-cache");
-    response.setDateHeader ("Expires", 0);
-%>
 <html>
 <head>
     <title>Ccc</title>
 </head>
 <body>
 <%
-    CBean atrCBean = (CBean) application.getAttribute("atrCBean");
-    String cBeanParameter = (String) session.getAttribute("cBeanParameter");
+    CBean atrCBean = (CBean) request.getAttribute("atrCBean");
+    String cBeanParameter = (String) request.getAttribute("cBeanParameter");
 %>
 
     <h1>CBean: <%=cBeanParameter%></h1>

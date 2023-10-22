@@ -1,6 +1,6 @@
-package com.example.pvi_lab6.servlets;
-import com.example.pvi_lab6.utils.CBean;
-import com.example.pvi_lab6.utils.ConsoleColors;
+package com.example.pvi_lab7.servlets;
+import com.example.pvi_lab7.utils.CBean;
+import com.example.pvi_lab7.utils.ConsoleColors;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
@@ -15,13 +15,9 @@ import java.io.PrintWriter;
 public class CccServlet extends HttpServlet {
 
     public CBean cBean = null;
-    private ServletContext servletContext;
 
     public void init() {
         cBean = new CBean();
-        servletContext = getServletContext();
-        servletContext.setAttribute("atrCBean", cBean);
-        System.out.println(ConsoleColors.GREEN + "\n[CCC] init: atrCBean = " + servletContext.getAttribute("atrCBean"));
     }
 
     public void service(ServletRequest req, ServletResponse res) throws IOException, ServletException {
@@ -29,6 +25,9 @@ public class CccServlet extends HttpServlet {
         HttpServletRequest httpServletRequest = (HttpServletRequest)req;
         res.setContentType("text/html");
         PrintWriter out = res.getWriter();
+
+        // Атрибут запроса atrCBean
+//        req.setAttribute("atrCBean", cBean);
 
         // Query-параметр CBean. Равен либо new, либо old. В противном случае – ошибка
         String cBeanParameter = req.getParameter("CBean");
@@ -58,21 +57,19 @@ public class CccServlet extends HttpServlet {
 
         if (cBeanParameter.equalsIgnoreCase("new")) {
             // Создать новый объект cBean с новыми значениями value1, value2, value3
-            // и установить новый атрибут контекста atrCBean
+            // и установить новый атрибут контекста сервлета atrCBean
             cBean = new CBean(value1, value2, value3);
-            servletContext.setAttribute("atrCBean", cBean);
+            req.setAttribute("atrCBean", cBean);
             System.out.println(ConsoleColors.BLUE + "[CCC] service: atrCBean = " +
-                    servletContext.getAttribute("atrCBean") + ConsoleColors.YELLOW + " (new)\n");
+                    req.getAttribute("atrCBean") + ConsoleColors.YELLOW + " (new)\n");
         }
         else if (cBeanParameter.equalsIgnoreCase("old")) {
             System.out.println(ConsoleColors.BLUE + "[CCC] service: atrCBean = " +
-                    servletContext.getAttribute("atrCBean") + ConsoleColors.YELLOW + " (old)\n");
+                    req.getAttribute("atrCBean") + ConsoleColors.YELLOW + " (old)\n");
         }
 
 
-        // Установка атрибутА сессии cBeanParameter и переопределение на ccc.jsp
-        HttpSession session = httpServletRequest.getSession();
-        session.setAttribute("cBeanParameter", cBeanParameter);
+        req.setAttribute("cBeanParameter", cBeanParameter);
         req.getRequestDispatcher("ccc.jsp").forward(req, res);
     }
 }
