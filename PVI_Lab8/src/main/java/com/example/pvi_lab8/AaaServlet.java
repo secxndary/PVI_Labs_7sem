@@ -17,7 +17,7 @@ public class AaaServlet extends HttpServlet {
         String uriLocal = "http://localhost:8081/PVI_Lab8_war_exploded/bbb-servlet";
         String uriRemote = "http://remote-server-7:8080/PVI_Lab8-1.0-SNAPSHOT/bbb-servlet";
         HttpClient client = new HttpClient();
-        PostMethod methodPost = new PostMethod(uriLocal);
+        PostMethod methodPost = new PostMethod(uriRemote);
 
         String name1 = req.getParameter("name1");
         String name2 = req.getParameter("name2");
@@ -40,7 +40,7 @@ public class AaaServlet extends HttpServlet {
 
         pw.println("<h1>Bbb response body: </h1>");
         pw.println(methodPost.getResponseBodyAsString());
-        pw.println("<br /> <h1>Headers:</h1>");
+        pw.println("<br /> <h1>Bbb response headers:</h1>");
 
         Header[] headers = methodPost.getResponseHeaders();
         for (Header header : headers)

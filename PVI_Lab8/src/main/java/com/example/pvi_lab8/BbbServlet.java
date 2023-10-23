@@ -13,20 +13,22 @@ public class BbbServlet extends HttpServlet {
         Enumeration<String> params = req.getParameterNames();
         StringBuilder sb = new StringBuilder();
 
-        sb.append("<b>Headers: </b> <br />");
+        sb.append("<b>Request headers: </b> <br />");
         while (headers.hasMoreElements()) {
             String headerName = headers.nextElement();
             if (headerName.startsWith("x-"))
                 sb.append(headerName).append(": ").append(req.getHeader(headerName)).append("<br />");
         }
 
-        sb.append("<br /> <b>Params: </b> <br />");
+        sb.append("<br /> <b>Request params: </b> <br />");
         while (params.hasMoreElements()) {
             String paramName = params.nextElement();
             sb.append(paramName).append(": ").append(req.getParameter(paramName)).append("<br />");
         }
 
-        PrintWriter pw = res.getWriter();
-        pw.println(sb);
+        res.addHeader("x-header-bbb-1", "1st custom header from Bbb servlet");
+        res.addHeader("x-header-bbb-2", "2nd custom header from Bbb servlet");
+
+        res.getWriter().println(sb);
     }
 }
