@@ -1,9 +1,5 @@
 <%@ page import="com.example.pvi_lab6.utils.CBean" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-    response.setHeader("Cache-Control","no-cache");
-    response.setDateHeader ("Expires", 0);
-%>
 <html>
 <head>
     <title>Ccc</title>

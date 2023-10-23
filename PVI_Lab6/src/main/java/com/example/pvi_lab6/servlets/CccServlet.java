@@ -27,18 +27,20 @@ public class CccServlet extends HttpServlet {
     public void service(ServletRequest req, ServletResponse res) throws IOException, ServletException {
 
         HttpServletRequest httpServletRequest = (HttpServletRequest)req;
+        HttpSession session = httpServletRequest.getSession();
         res.setContentType("text/html");
         PrintWriter out = res.getWriter();
 
         // Query-параметр CBean. Равен либо new, либо old. В противном случае – ошибка
         String cBeanParameter = req.getParameter("CBean");
+        System.out.println(ConsoleColors.CYAN + "[CCC] service: CBean = " + cBeanParameter);
         // Параметры value1, value2 и value3, передаваемые в POST-запросе (для установки в поля класса CBean)
         String value1 = req.getParameter("value1");
         String value2 = req.getParameter("value2");
         String value3 = req.getParameter("value3");
-        System.out.println(ConsoleColors.CYAN + "[CCC] service: CBean = " + cBeanParameter);
 
 
+        // Обработка ошибок
         if (!httpServletRequest.getMethod().equalsIgnoreCase("GET") && !httpServletRequest.getMethod().equalsIgnoreCase("POST")) {
             out.println("<h2>Use GET or POST method.</h2>");
             System.out.println(ConsoleColors.RED + "[CCC] service: Method should be GET or POST\n");
@@ -70,8 +72,7 @@ public class CccServlet extends HttpServlet {
         }
 
 
-        // Установка атрибутА сессии cBeanParameter и переопределение на ccc.jsp
-        HttpSession session = httpServletRequest.getSession();
+        // Установка атрибута сессии cBeanParameter и переопределение на ccc.jsp
         session.setAttribute("cBeanParameter", cBeanParameter);
         req.getRequestDispatcher("ccc.jsp").forward(req, res);
     }

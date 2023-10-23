@@ -23,21 +23,23 @@ public class CccServlet extends HttpServlet {
     public void service(ServletRequest req, ServletResponse res) throws IOException, ServletException {
 
         HttpServletRequest httpServletRequest = (HttpServletRequest)req;
+        HttpSession session = httpServletRequest.getSession();
+        String sessionId = session.getId();
         res.setContentType("text/html");
         PrintWriter out = res.getWriter();
 
-        // Атрибут запроса atrCBean
-//        req.setAttribute("atrCBean", cBean);
-
         // Query-параметр CBean. Равен либо new, либо old. В противном случае – ошибка
         String cBeanParameter = req.getParameter("CBean");
+        System.out.println(ConsoleColors.PURPLE + "[CCC] service: CBean:\t\t" + cBeanParameter);
         // Параметры value1, value2 и value3, передаваемые в POST-запросе (для установки в поля класса CBean)
         String value1 = req.getParameter("value1");
         String value2 = req.getParameter("value2");
         String value3 = req.getParameter("value3");
-        System.out.println(ConsoleColors.CYAN + "[CCC] service: CBean = " + cBeanParameter);
+        // Тип атрибута: запрос (пункт 7.8.3) либо сесиия (пункт 7.8.4)
+        String attributeType = req.getParameter("attributeType");
 
 
+        // Обработка ошибок
         if (!httpServletRequest.getMethod().equalsIgnoreCase("GET") && !httpServletRequest.getMethod().equalsIgnoreCase("POST")) {
             out.println("<h2>Use GET or POST method.</h2>");
             System.out.println(ConsoleColors.RED + "[CCC] service: Method should be GET or POST\n");
@@ -57,18 +59,24 @@ public class CccServlet extends HttpServlet {
 
         if (cBeanParameter.equalsIgnoreCase("new")) {
             // Создать новый объект cBean с новыми значениями value1, value2, value3
-            // и установить новый атрибут контекста сервлета atrCBean
             cBean = new CBean(value1, value2, value3);
-            req.setAttribute("atrCBean", cBean);
-            System.out.println(ConsoleColors.BLUE + "[CCC] service: atrCBean = " +
+            // Установить атрибут запроса atrCBean
+            if (attributeType.equalsIgnoreCase("request"))
+                req.setAttribute("atrCBean", cBean);
+            // Установить атрибут сессии atrCBean
+            if (attributeType.equalsIgnoreCase("session"))
+                session.setAttribute(sessionId, cBean);
+            System.out.println(ConsoleColors.CYAN  +  "[CCC] service: Object:\t\t" + cBean);
+            System.out.println(ConsoleColors.BLUE + "[CCC] service: atrCBean:\t" +
                     req.getAttribute("atrCBean") + ConsoleColors.YELLOW + " (new)\n");
         }
         else if (cBeanParameter.equalsIgnoreCase("old")) {
-            System.out.println(ConsoleColors.BLUE + "[CCC] service: atrCBean = " +
+            System.out.println(ConsoleColors.CYAN  +  "[CCC] service: Object:\t\t" + cBean);
+            System.out.println(ConsoleColors.BLUE + "[CCC] service: atrCBean:\t" +
                     req.getAttribute("atrCBean") + ConsoleColors.YELLOW + " (old)\n");
         }
 
-
+        req.setAttribute("attributeType", attributeType);
         req.setAttribute("cBeanParameter", cBeanParameter);
         req.getRequestDispatcher("ccc.jsp").forward(req, res);
     }
