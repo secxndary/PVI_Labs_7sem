@@ -23,5 +23,7 @@
     <input type="submit" value="Ccc Servlet" />
 </form>
 
+<p><a href="ccc.jsp">ccc.jsp</a></p>
+
 </body>
 </html>
