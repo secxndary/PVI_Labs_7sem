@@ -1,0 +1,30 @@
+<html>
+<head>
+    <title>
+        Lab10
+    </title>
+</head>
+<body>
+<h2>
+    <label>Params for SQL query: id &gt param1 and id &lt param2</label>
+    <form action="database-servlet">
+        <div>
+            <input type="text" name="param1" placeholder="param1"/>
+            <input type="text" name="param2" placeholder="param2"/>
+        </div>
+        <button style="margin-top: .5rem">Do</button>
+    </form>
+    <label>Param for stored procedure: where Name like param1</label>
+    <form action="/database-servlet">
+        <div>
+            <input type="text" name="param1" placeholder="param1"/>
+        </div>
+        <button style="margin-top: .5rem">Do</button>
+    </form>
+    <label>Static request</label>
+    <form action="/database-servlet">
+        <button style="margin-top: .5rem">Do</button>
+    </form>
+</h2>
+</body>
+</html>
