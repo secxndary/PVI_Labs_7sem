@@ -18,3 +18,20 @@ insert into DiningRoom (Name, Price, Comment) values
 ('Рассольник', 0.95, 'Жесткий суп'),
 ('Булочка Витьба', 0.52, 'Бюджетно чисто похавать'),
 ('Пицца Школьная', 2.56, 'Раскошелиться на крутой обед');
+
+create proc GetDishesByPriceRange
+    @minPrice float,
+    @maxPrice float
+as
+begin
+    select 
+		*
+	from 
+		DiningRoom 
+	where 
+		Price > @minPrice and
+		Price < @maxPrice;
+end;
+
+select * from DiningRoom;
+exec GetDishesByPriceRange 1, 2;
