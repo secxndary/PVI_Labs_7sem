@@ -2,12 +2,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PVI-12</title>
+    <title>$Title$</title>
 </head>
 <body>
-<h1>PVI-12</h1>
+<h1>PVI-13</h1>
 
-<p><a href="sss-servlet">Sss</a></p>
+<a href="${pageContext.request.contextPath}/files">Files List</a>
 
 </body>
 </html>

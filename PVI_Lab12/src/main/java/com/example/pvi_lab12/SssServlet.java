@@ -11,6 +11,6 @@ public class SssServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
-        res.getWriter().println("<h1>[SSS] doGet()</h1>");
+        res.getWriter().println("<h1>Welcome! Sss Servlet</h1>");
     }
 }

@@ -1,11 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>PVI-12</title>
 </head>
 <body>
 
-<form method="post" action="j_security_check">
+<form method="POST" action="j_security_check">
     <label for="username">Username</label>  <br />
     <input id="username" type="text" name="j_username" /> <br />
 
