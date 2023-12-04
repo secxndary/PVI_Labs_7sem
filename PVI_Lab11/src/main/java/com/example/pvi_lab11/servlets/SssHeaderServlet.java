@@ -28,6 +28,9 @@ public class SssHeaderServlet extends HttpServlet implements Servlet {
             int z = x + y;
 
             res.setHeader("value-z", Integer.toString(z));
+
+            Thread.sleep(1000);
+
         } catch (Exception e) {
             res.getWriter().println(e.getMessage());
         }

@@ -26,19 +26,21 @@ public class SssJsonServlet extends HttpServlet implements Servlet {
 
         try {
             Random random = new Random();
+            StringBuilder sb = new StringBuilder();
             int n = Integer.parseInt(req.getHeader("XRand-N"));
-            StringBuilder textResult = new StringBuilder();
             int count = random.nextInt(6) + 5;
 
-            textResult.append("[");
+            sb.append("[");
             for (int i = 0; i < count; i++) {
                 int number = random.nextInt(n * 2) - n;
-                textResult.append(number).append(i < count -1 ? "," : "");
+                sb.append(number).append(i < count -1 ? "," : "");
             }
-            textResult.append("]");
+            sb.append("]");
 
             res.setContentType("application/json");
-            res.getWriter().println(textResult);
+            res.getWriter().println(sb);
+
+            Thread.sleep(1000);
 
         } catch (Exception e) {
             res.getWriter().println(e.getMessage());

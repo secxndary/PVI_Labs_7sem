@@ -18,20 +18,20 @@
 <br /> <br />
 
 
-<h1>Task #2</h1>
+<h1>Tasks #2-4</h1>
 <div>
     <form action="sss-xml" method="POST">
-        <input name="n" id="n" type="number" placeholder="Enter что то там"> <br />
-        xml: <div id="result-task-2-1"></div>
-        json: <div id="result-task-2-2"></div>
-        <input type="button" value="xml" onclick="getXML(this.form.n.value, true)">
-        <input type="button" value="json" onclick="getJSON(this.form.n.value, true)">
+        <input name="n" id="n" type="number" placeholder="Enter integer number"> <br />
+        xml: <div id="xmlOutput"></div>
+        json: <div id="jsonOutput"></div>
+        <input type="button" value="Get using XML" onclick="getXML(this.form.n.value, true)">
+        <input type="button" value="Get using JSON" onclick="getJSON(this.form.n.value, true)">
     </form>
 </div>
 <div>
     <div>
-        <input type="button" value="sync" onclick="getSync()">
-        <input type="button" value="async" onclick="getAsync()">
+        <input type="button" value="Get both Sync" onclick="getSync()">
+        <input type="button" value="Get both Async" onclick="getAsync()">
     </div>
 </div>
 <br /> <br />
@@ -65,11 +65,11 @@
         if (async) {
             xhr.onreadystatechange = () => {
                 if (xhr.readyState === 4 && xhr.status === 200) {
-                    document.getElementById("result-task-2-1").innerHTML = stringifyXML(xhr);
+                    document.getElementById("xmlOutput").innerHTML = stringifyXML(xhr);
                 }
             };
         } else
-            document.getElementById("result-task-2-1").innerHTML = stringifyXML(xhr);
+            document.getElementById("xmlOutput").innerHTML = stringifyXML(xhr);
     }
 
     function getJSON(n, async) {
@@ -81,11 +81,11 @@
         if (async) {
             xhr.onreadystatechange = () => {
                 if (xhr.readyState === 4 && xhr.status === 200) {
-                    document.getElementById("result-task-2-2").innerHTML = stringifyJSON(xhr);
+                    document.getElementById("jsonOutput").innerHTML = stringifyJSON(xhr);
                 }
             };
         } else {
-            document.getElementById("result-task-2-2").innerHTML = stringifyJSON(xhr);
+            document.getElementById("jsonOutput").innerHTML = stringifyJSON(xhr);
         }
     }
 

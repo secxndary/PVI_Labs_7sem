@@ -25,19 +25,22 @@ public class SssXmlServlet extends HttpServlet implements Servlet {
 
         try {
             Random random = new Random();
+            StringBuilder sb = new StringBuilder();
             int n = Integer.parseInt(req.getHeader("XRand-N"));
-            StringBuilder textResult = new StringBuilder("<?xml version=\"1.0\"  encoding = \"utf-8\" ?>");
             int count = random.nextInt(6) + 5;
 
-            textResult.append("<rand>");
+            sb.append("<?xml version=\"1.0\"  encoding = \"utf-8\" ?>");
+            sb.append("<rand>");
             for (int i = 0; i < count; i++) {
                 int number = random.nextInt(n * 2) - n;
-                textResult.append("<num>").append(number).append("</num>");
+                sb.append("<num>").append(number).append("</num>");
             }
-            textResult.append("</rand>");
+            sb.append("</rand>");
 
             res.setContentType("text/xml");
-            res.getWriter().println(textResult);
+            res.getWriter().println(sb);
+
+            Thread.sleep(1000);
 
         } catch (Exception e) {
             res.getWriter().println(e.getMessage());
