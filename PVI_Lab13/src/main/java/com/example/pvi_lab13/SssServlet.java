@@ -6,39 +6,38 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
-@WebServlet(name = "sssServlet", value = "/sss-servlet")
+@WebServlet(name = "files", value = "/files")
 public class SssServlet extends HttpServlet {
     BufferedWriter writer;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String filename = req.getParameter("file");
-        String docdir = getServletContext().getInitParameter("files");
+    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
+        String fileName = req.getParameter("file");
+        String directoryPath = getServletContext().getInitParameter("filesPath");
 
-        if (filename == null) {
-            Find files = new Find(docdir, "docx");
-            resp.setContentType("text/html");
+        if (fileName == null) {
+            Find files = new Find(directoryPath, "docx");
+            res.setContentType("text/html; charset=utf-8");
 
-            StringBuilder result = new StringBuilder();
-            for (String file : files.list) {
-                result.append("<br>").append("<a href='/PVI_Lab13_war_exploded/files?file=").append(file).append("' >").append(file).append("</a>");
-            }
-            resp.getWriter().println(result);
+            StringBuilder sb = new StringBuilder();
+            sb.append("<h1>Files</h1>");
+            for (String file : files.list)
+                sb.append("<a href='/PVI_Lab13_war_exploded/files?file=").append(file).append("' >").append(file).append("</a>").append("<br>");
+            res.getWriter().println(sb);
         }
         else {
-            System.out.println(filename);
+            System.out.println(fileName);
             try {
-                //пересылка word клиенту
-                lofFile(filename);
-                File doc = new File(docdir.concat("\\").concat(filename));
-                resp.setContentType("application/msword");
-                resp.addHeader("Content-Disposition", "attachment; filename="+ doc.getName());
-                resp.setContentLength((int) doc.length());
+                lofFile(fileName);
+                File document = new File(directoryPath.concat("\\").concat(fileName));
+                res.setContentType("application/msword; charset=utf-8");
+                res.addHeader("Content-Disposition", "attachment; fileName=" + document.getName());
+                res.setContentLength((int)document.length());
 
-                FileInputStream in = new FileInputStream(doc);
+                FileInputStream in = new FileInputStream(document);
                 BufferedInputStream buf = new BufferedInputStream(in);
-                ServletOutputStream out = resp.getOutputStream();
-                int readBytes = 0;
+                ServletOutputStream out = res.getOutputStream();
+                int readBytes;
                 while ((readBytes = buf.read()) != -1) {
                     out.write(readBytes);
                 }
@@ -49,7 +48,6 @@ public class SssServlet extends HttpServlet {
     }
 
     public void lofFile(String fileName) throws IOException {
-        System.out.println("log");
         writer = new BufferedWriter(new FileWriter("C:\\Users\\valda\\source\\repos\\semester#7\\PvI\\PVI_Lab13\\output.txt", true));
         writer.append(fileName);
         writer.append("\n");

@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 
 public class Find {
-    public String list[];
+    public String[] list;
 
     public Find(String directory, String extension) {
         File dir = new File(directory);
@@ -13,8 +13,8 @@ public class Find {
         }
     }
 
-    protected class FileFilter implements FilenameFilter {
-        String extension = null;
+    protected static class FileFilter implements FilenameFilter {
+        String extension;
 
         FileFilter(String extension) {
             this.extension = "." + extension;
