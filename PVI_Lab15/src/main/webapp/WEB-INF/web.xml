@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         version="5.0">
+
+    <context-param>
+        <param-name>sender_email</param-name>
+        <param-value>countreoffensive@gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>sender_email_password</param-name>
+        <param-value>qegb nwzg nfai pgwh</param-value>
+    </context-param>
+    <context-param>
+        <param-name>receiver_email</param-name>
+        <param-value>countreoffensive@gmail.com</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>port</param-name>
+        <param-value>587</param-value>
+    </context-param>
+    <context-param>
+        <param-name>host_protocol</param-name>
+        <param-value>smtp.gmail.com</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>subject_text</param-name>
+        <param-value>Hello World</param-value>
+    </context-param>
+    <context-param>
+        <param-name>message_text</param-name>
+        <param-value>Message from sanya</param-value>
+    </context-param>
+</web-app>

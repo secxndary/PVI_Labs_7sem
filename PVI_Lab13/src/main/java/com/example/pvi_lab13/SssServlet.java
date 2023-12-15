@@ -28,7 +28,7 @@ public class SssServlet extends HttpServlet {
         else {
             System.out.println(fileName);
             try {
-                lofFile(fileName);
+                writeFile(fileName);
                 File document = new File(directoryPath.concat("\\").concat(fileName));
                 res.setContentType("application/msword; charset=utf-8");
                 res.addHeader("Content-Disposition", "attachment; fileName=" + document.getName());
@@ -47,7 +47,7 @@ public class SssServlet extends HttpServlet {
         }
     }
 
-    public void lofFile(String fileName) throws IOException {
+    public void writeFile(String fileName) throws IOException {
         writer = new BufferedWriter(new FileWriter("C:\\Users\\valda\\source\\repos\\semester#7\\PvI\\PVI_Lab13\\output.txt", true));
         writer.append(fileName);
         writer.append("\n");
