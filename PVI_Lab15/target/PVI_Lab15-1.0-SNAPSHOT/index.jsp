@@ -3,11 +3,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Messages</title>
+    <title>PVI-15</title>
 </head>
 <body>
 
-<h1><% application.getInitParameter("sender_email"); %> messages</h1>
+<h1><% application.getInitParameter("sender_email"); %> Messages</h1>
 <%
     try
     {

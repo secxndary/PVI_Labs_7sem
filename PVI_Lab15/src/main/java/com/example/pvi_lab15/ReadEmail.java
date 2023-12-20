@@ -25,11 +25,11 @@ public class ReadEmail
         Folder folder = store.getFolder("INBOX");
         folder.open(Folder.READ_ONLY);
 
-        StringBuilder result = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
 
         for (Message message: folder.getMessages(1, 200))
         {
-            result.append("<a href='/PVI_Lab15_war_exploded/getMessage.jsp?date=")
+            sb.append("<a href='/PVI_Lab15_war_exploded/getMessage.jsp?date=")
                     .append(message.getSentDate())
                     .append("'>")
                     .append(message.getSubject())
@@ -38,7 +38,7 @@ public class ReadEmail
 
         folder.close(true);
         store.close();
-        return result.toString();
+        return sb.toString();
     }
 
     public static String getMessage(final String userEmail, final String password, final String date) throws MessagingException, IOException, IOException
@@ -57,15 +57,15 @@ public class ReadEmail
         Folder folder = store.getFolder("INBOX");
         folder.open(Folder.READ_ONLY);
 
-        StringBuilder result = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         for (Message message: folder.getMessages())
         {
             if (message.getSentDate().toString().equals(date))
             {
-                result.append("<div  style='cursor: pointer;'>");
-                result.append("<p>Sender:   ").append(InternetAddress.toString(message.getFrom())).append("<br/>");
-                result.append("Theme:   ").append(message.getSubject()).append("<br/>");
-                String messageContent = new String();
+                sb.append("<div  style='cursor: pointer;'>");
+                sb.append("<p>Sender:   ").append(InternetAddress.toString(message.getFrom())).append("<br/>");
+                sb.append("Theme:   ").append(message.getSubject()).append("<br/>");
+                String messageContent = null;
                 String contentType = message.getContentType();
 
                 if (contentType.contains("multipart"))
@@ -84,17 +84,17 @@ public class ReadEmail
                     if (content != null)
                         messageContent = content.toString();
                 }
-                result.append("Message: ").append(messageContent).append("<br/>");
-                result.append("Date:    ").append(message.getSentDate()).append("</p>");
-                result.append("</div>");
-                result.append("-----------------------------------------------");
-                result.append("</br>");
+                sb.append("Message: ").append(messageContent).append("<br/>");
+                sb.append("Date:    ").append(message.getSentDate()).append("</p>");
+                sb.append("</div>");
+                sb.append("-----------------------------------------------");
+                sb.append("</br>");
                 break;
             }
         }
 
         folder.close(true);
         store.close();
-        return result.toString();
+        return sb.toString();
     }
 }

@@ -6,3 +6,5 @@ java.docx
 ÏWS01_2s.docx
 ÏWS04_4s.docx
 ÏWS02_2s.docx
+ÏWS01_2s.docx
+ÏWS08_6s.docx
