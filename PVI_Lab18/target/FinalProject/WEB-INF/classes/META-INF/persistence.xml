@@ -10,7 +10,7 @@
         <class>by.bstu.entity.WSRefComment</class>
 
         <properties>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/uwsr"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://postgres-container:5432/uwsr"/>
             <property name="jakarta.persistence.jdbc.user" value="postgres"/>
             <property name="jakarta.persistence.jdbc.password" value="1111"/>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
